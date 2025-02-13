@@ -76,10 +76,11 @@
         <div class="hidden-message" id="message"></div>
     </div>
 
-    <audio id="bgMusic" src="hi.mp3 - Made with Clipchamp.mp4"></audio> <!-- Add your song file -->
+    <audio id="bgMusic" src="C:\Users\DELL\Downloads\hi.mp3"></audio> <!-- Add your song file -->
 
     <script>
         const lines = [
+           
             "LOVE IS NOT A BOND BETWEEN A BOY AND A GIRL...",
             "BUT A BEAUTIFUL FRIENDSHIP TOO! ❤️",
             "I LOVE YOU RAA BAVA..❤️❤️❤️",
@@ -87,21 +88,37 @@
         ];
 
         let index = 0;
-        let interval;
+        let textInterval;
+        let musicPlaying = false;
 
         function startSurprise() {
-            document.getElementById('clickButton').classList.add('hide'); // Hide button
+            const button = document.getElementById('clickButton');
             const audio = document.getElementById('bgMusic');
-            audio.play(); // Start playing music
+            const message = document.getElementById('message');
+
+            button.classList.add('hide'); // Hide button
+            message.style.opacity = "0"; // Hide text initially
+
+            // Play song
+            if (!musicPlaying) {
+                audio.play();
+                musicPlaying = true;
+            }
+
+            // Start displaying text **while** the song is playing
             showNextLine();
+            textInterval = setInterval(showNextLine, 3000);
 
-            // Loop through text continuously
-            interval = setInterval(() => {
-                showNextLine();
-            }, 3000); // Change text every 3 seconds
-
-            // Start floating hearts animation
+            // Start floating hearts
             setInterval(createHeart, 500);
+
+            // When the song ends, reset everything
+            audio.onended = () => {
+                clearInterval(textInterval);
+                message.style.opacity = "0"; // Hide text
+                button.classList.remove('hide'); // Show button again
+                musicPlaying = false; // Allow replay
+            };
         }
 
         function showNextLine() {
@@ -110,7 +127,7 @@
             setTimeout(() => {
                 message.innerHTML = lines[index]; // Update text
                 message.style.opacity = "1"; // Show new text
-                index = (index + 1) % lines.length; // Loop back to first line after the last one
+                index = (index + 1) % lines.length; // Loop back after last line
             }, 1000); // Fade-out effect before updating text
         }
 
