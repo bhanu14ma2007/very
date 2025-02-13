@@ -26,6 +26,7 @@
             transform: translateY(20px);
             transition: opacity 1s ease-in, transform 1s ease-in;
             font-weight: bold;
+             animation: moveText 5s linear infinite;
         }
         .reveal-button {
             padding: 15px 35px;
@@ -71,6 +72,11 @@
             opacity: 1;
             transform: scale(1);
         }
+         @keyframes moveText {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -79,8 +85,8 @@
         <div class="hidden-content">
             <div class="hidden-message fade-in" id="line1">I LOVE YOU 💕</div>
             <div class="hidden-message fade-in" id="line2">HAPPY VALENTINE'S DAY ❤️</div>
-            <h1 class="fade-in" id="line3">❤️ LOVE IS NOT A BOND BETWEEN A BOY AND A GIRL, BUT A BEAUTIFUL FRIENDSHIP TOO! ❤️</h1>
-            <h1 class="fade-in" id="line4">I LOVE YOU RAA BAVA..❤️❤️❤️</h1>
+            <h1 class="hidden-message fade-in" id="line3">❤️ LOVE IS NOT A BOND BETWEEN A BOY AND A GIRL, BUT A BEAUTIFUL FRIENDSHIP TOO! ❤️</h1>
+            <h1 class="hidden-message fade-in" id="line4">I LOVE YOU RAA BAVA..❤️❤️❤️</h1>
             <div class="name-box fade-in" id="line5">Karthik ❤️ Chari</div>
         </div>
     </div>
